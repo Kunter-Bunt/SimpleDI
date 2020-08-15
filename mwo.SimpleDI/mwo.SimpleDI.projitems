@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>2b85c21e-9673-45b2-bd38-81d66ac061c6</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>mwo.SimpleDI</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)DependencyContainer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)IDependencyContainer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DuplicateRegistrationException.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MissingRegistrationException.cs" />
+  </ItemGroup>
+</Project>
