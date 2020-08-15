@@ -33,7 +33,7 @@ namespace mwo.SimpleDI
             if (IsRegistered<T>())
                 throw new DuplicateRegistrationException(typeof(T));
 
-            Registrations.Add(typeof(T), _ => builder(this));
+            Registrations.Add(typeof(T), _ => builder(_));
             return this;
         }
 
