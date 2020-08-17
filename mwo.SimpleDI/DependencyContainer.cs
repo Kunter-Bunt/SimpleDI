@@ -52,9 +52,11 @@ namespace mwo.SimpleDI
             {
                 Register(builder);
             }
+#pragma warning disable CA1031 // Do not catch general exception types
             catch (DuplicateRegistrationException)
             {
             }
+#pragma warning restore CA1031 // Do not catch general exception types
             return this;
         }
 
@@ -76,11 +78,13 @@ namespace mwo.SimpleDI
                 obj = Resolve<T>();
                 return true;
             }
+#pragma warning disable CA1031 // Do not catch general exception types
             catch (MissingRegistrationException)
             {
                 obj = default;
                 return false;
             }
+#pragma warning restore CA1031 // Do not catch general exception types
         }
     }
 }
