@@ -7,6 +7,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mwo.SimpleDI.Tests", "mwo.S
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "mwo.SimpleDI", "mwo.SimpleDI\mwo.SimpleDI.shproj", "{2B85C21E-9673-45B2-BD38-81D66AC061C6}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{20800E84-D02E-4517-A92A-A61EB79364B0}"
+	ProjectSection(SolutionItems) = preProject
+		mwo.SimpleDI.nuspec = mwo.SimpleDI.nuspec
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		mwo.SimpleDI\mwo.SimpleDI.projitems*{2b85c21e-9673-45b2-bd38-81d66ac061c6}*SharedItemsImports = 13

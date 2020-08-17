@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<package>
+  <metadata>
+    <id>mwo.SimpleDI</id>
+    <version>1.0.0.0</version>
+    <title>mwo.SimpleDI</title>
+    <authors>Marius Wodtke</authors>
+    <owners>Marius Wodtke</owners>
+    <projectUrl>https://github.com/Kunter-Bunt/SimpleDI</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>A Dependency Injection framework that works without a Build operation</description>
+    <copyright>Copyright 2020</copyright>
+    <releaseNotes>https://github.com/Kunter-Bunt/SimpleDI</releaseNotes>
+    <dependencies/>
+  </metadata>
+  <files>
+    <file src="build\*" target="build" />
+    <file src="mwo.SimpleDI\**" target="projects\mwo.SimpleDI" />
+  </files>
+</package>
