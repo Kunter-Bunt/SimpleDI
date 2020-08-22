@@ -4,10 +4,10 @@ namespace mwo.SimpleDI
 {
     public static class DependencyContainerManager
     {
-        public static Dictionary<string, DependencyContainer> ManagedContainers = new Dictionary<string, DependencyContainer>();
+        public static Dictionary<string, IDependencyContainer> ManagedContainers = new Dictionary<string, IDependencyContainer>();
 
         private static DependencyContainer _default;
-        public static DependencyContainer Default
+        public static IDependencyContainer Default
         {
             get
             {
@@ -16,12 +16,12 @@ namespace mwo.SimpleDI
             }
         }
 
-        public static DependencyContainer Unique
+        public static IDependencyContainer Unique
         {
             get => new DependencyContainer(Default);
         }
 
-        public static DependencyContainer GetOrCreate(string name, DependencyContainer parent = null)
+        public static IDependencyContainer GetOrCreate(string name, IDependencyContainer parent = null)
         {
             if (!ManagedContainers.ContainsKey(name))
                 ManagedContainers.Add(name, new DependencyContainer(parent ?? Default));
