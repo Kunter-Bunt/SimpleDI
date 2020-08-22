@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Net;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace mwo.SimpleDI.Tests
@@ -13,6 +12,7 @@ namespace mwo.SimpleDI.Tests
             DependencyContainerManager.Reset();
         }
 
+        #region Default
         [TestMethod]
         public void Default_CanRegisterTest()
         {
@@ -33,7 +33,9 @@ namespace mwo.SimpleDI.Tests
             //Assert
             Assert.IsNull(container.ParentContainer);
         }
+        #endregion
 
+        #region Unique
         [TestMethod]
         public void Unique_CanRegisterTest()
         {
@@ -85,7 +87,9 @@ namespace mwo.SimpleDI.Tests
             Assert.IsTrue(container.TryResolve(out Guid _));
             Assert.AreEqual(DependencyContainerManager.Default, container.ParentContainer);
         }
+        #endregion
 
+        #region GetOrCreate
         [TestMethod]
         public void GetOrCreate_CanRegisterTest()
         {
@@ -139,7 +143,9 @@ namespace mwo.SimpleDI.Tests
             //Assert
             Assert.IsTrue(container.TryResolve(out Guid _));
         }
+        #endregion
 
+        #region Reset
         [TestMethod]
         public void Reset_DefaultTest()
         {
@@ -169,5 +175,6 @@ namespace mwo.SimpleDI.Tests
             Assert.IsFalse(DependencyContainerManager.ManagedContainers.ContainsKey(name));
             Assert.IsTrue(container.TryResolve(out Guid _));
         }
+        #endregion
     }
 }
