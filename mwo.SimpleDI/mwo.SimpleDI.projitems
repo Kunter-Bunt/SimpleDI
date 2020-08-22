@@ -10,6 +10,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)DependencyContainer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DependencyContainerManager.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IDependencyContainer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DuplicateRegistrationException.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MissingRegistrationException.cs" />

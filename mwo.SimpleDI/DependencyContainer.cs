@@ -48,15 +48,9 @@ namespace mwo.SimpleDI
 
         public IDependencyContainer RegisterWeak<T>(Func<IDependencyContainer, T> builder)
         {
-            try
-            {
+            if (!IsRegistered<T>())
                 Register(builder);
-            }
-#pragma warning disable CA1031 // Do not catch general exception types
-            catch (DuplicateRegistrationException)
-            {
-            }
-#pragma warning restore CA1031 // Do not catch general exception types
+
             return this;
         }
 

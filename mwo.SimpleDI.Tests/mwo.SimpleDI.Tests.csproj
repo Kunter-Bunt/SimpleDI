@@ -51,6 +51,7 @@
   <ItemGroup>
     <Compile Include="DependencyContainerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="DependencyContainerManagerTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
