@@ -1,0 +1,251 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>mwo.SimpleDI.Doc</name>
+    </assembly>
+    <members>
+        <member name="T:mwo.SimpleDI.DependencyContainer">
+            <summary>
+            A container to register to and resolve dependencies from.
+            </summary>
+        </member>
+        <member name="P:mwo.SimpleDI.DependencyContainer.Registrations">
+            <summary>
+            A collection holding all locally registered types. ParentContainer may contain more in its Registrations.
+            Local Registrations beat the Registrations of the ParentContainer.
+            </summary>
+        </member>
+        <member name="P:mwo.SimpleDI.DependencyContainer.ParentContainer">
+            <summary>
+            Containers may have a parent container that is considered when resolving.
+            </summary>
+        </member>
+        <member name="M:mwo.SimpleDI.DependencyContainer.#ctor(mwo.SimpleDI.IDependencyContainer)">
+            <summary>
+            Initializes a new instance of the mwo.SimpleDI.DependencyContainer class.
+            </summary>
+            <param name="parentContainer">A container to be set as the parent. Is considered when resolving.</param>
+        </member>
+        <member name="M:mwo.SimpleDI.DependencyContainer.#ctor">
+            <summary>
+            Initializes a new instance of the mwo.SimpleDI.DependencyContainer class.
+            </summary>
+        </member>
+        <member name="M:mwo.SimpleDI.DependencyContainer.IsRegistered``1">
+            <summary>
+            Checks whether a registration is present for the given type.
+            </summary>
+            <typeparam name="T">The type that shall be checked.</typeparam>
+            <returns>true if the type is registered to the container or its parent.</returns>
+        </member>
+        <member name="M:mwo.SimpleDI.DependencyContainer.Register``1(System.Func{mwo.SimpleDI.IDependencyContainer,``0})">
+            <summary>
+            Registers the builder as a generator for resolving the given type.
+            Throws if a builder is already registered for the type.
+            </summary>
+            <typeparam name="T">The type that shall be registered.</typeparam>
+            <param name="builder">The function to be executed when the given type is resolved.</param>
+            <returns>The container.</returns>
+            <exception cref="T:mwo.SimpleDI.DuplicateRegistrationException">Thrown when a Registration was already present for the type</exception>
+        </member>
+        <member name="M:mwo.SimpleDI.DependencyContainer.RegisterStrong``1(System.Func{mwo.SimpleDI.IDependencyContainer,``0})">
+            <summary>
+            Registers the builder as a generator for resolving the given type.
+            Overwrites existing registrations for the type.
+            </summary>
+            <typeparam name="T">The type that shall be registered.</typeparam>
+            <param name="builder">The function to be executed when the given type is resolved.</param>
+            <returns>The container.</returns>
+        </member>
+        <member name="M:mwo.SimpleDI.DependencyContainer.RegisterWeak``1(System.Func{mwo.SimpleDI.IDependencyContainer,``0})">
+            <summary>
+            Registers the builder as a generator for resolving the given type.
+            Skips registration if the type is already present in the Registrations.
+            </summary>
+            <typeparam name="T">The type that shall be registered.</typeparam>
+            <param name="builder">The function to be executed when the given type is resolved.</param>
+            <returns>The container.</returns>
+        </member>
+        <member name="M:mwo.SimpleDI.DependencyContainer.Resolve``1">
+            <summary>
+            Resolves a previously registered object.
+            </summary>
+            <typeparam name="T">The type that shall be resolved.</typeparam>
+            <returns>An object of the type T</returns>
+            <exception cref="T:mwo.SimpleDI.MissingRegistrationException">Thrown when no Registration was detected for the type.</exception>
+        </member>
+        <member name="M:mwo.SimpleDI.DependencyContainer.TryResolve``1(``0@)">
+            <summary>
+            Tries to resolve an objectt of the given type.
+            </summary>
+            <typeparam name="T">The type that shall be resolved.</typeparam>
+            <param name="obj">If true is returned, contains an object of type T, otherwise obj is default.</param>
+            <returns>true, if resolved sucessfully.</returns>
+        </member>
+        <member name="T:mwo.SimpleDI.DependencyContainerManager">
+            <summary>
+            Manager class to interact with IDependencyContainers.
+            </summary>
+        </member>
+        <member name="P:mwo.SimpleDI.DependencyContainerManager.ManagedContainers">
+            <summary>
+            Stores references to named dependency containers.
+            </summary>
+        </member>
+        <member name="P:mwo.SimpleDI.DependencyContainerManager.Default">
+            <summary>
+            A Singleton Container that will always yield the same DependencyContainer no matter from where the Property was called.
+            </summary>
+        </member>
+        <member name="P:mwo.SimpleDI.DependencyContainerManager.Unique">
+            <summary>
+            Always generates a new Unique Container with Default Container as Parent.
+            </summary>
+        </member>
+        <member name="M:mwo.SimpleDI.DependencyContainerManager.GetOrCreate(System.String,mwo.SimpleDI.IDependencyContainer)">
+            <summary>
+            Gets or creates a named container.
+            A reference to the container will be held in ManagedContainers. If called again, existing container will be taken from there.
+            </summary>
+            <param name="name">A key for identifying the named container.</param>
+            <param name="parent">Optionally pass a parent for container hirachies. If not Specified, Default is taken.</param>
+            <returns>A deoendency container.</returns>
+        </member>
+        <member name="M:mwo.SimpleDI.DependencyContainerManager.Reset">
+            <summary>
+            Remove all references to containers managed.
+            </summary>
+        </member>
+        <member name="T:mwo.SimpleDI.IDependencyContainer">
+            <summary>
+            A container to register to and resolve dependencies from.
+            </summary>
+        </member>
+        <member name="P:mwo.SimpleDI.IDependencyContainer.ParentContainer">
+            <summary>
+            Containers may have a parent container that is considered when resolving.
+            </summary>
+        </member>
+        <member name="M:mwo.SimpleDI.IDependencyContainer.Register``1(System.Func{mwo.SimpleDI.IDependencyContainer,``0})">
+            <summary>
+            Registers the builder as a generator for resolving the given type.
+            Throws if a builder is already registered for the type.
+            </summary>
+            <typeparam name="T">The type that shall be registered.</typeparam>
+            <param name="builder">The function to be executed when the given type is resolved.</param>
+            <returns>The container.</returns>
+        </member>
+        <member name="M:mwo.SimpleDI.IDependencyContainer.RegisterWeak``1(System.Func{mwo.SimpleDI.IDependencyContainer,``0})">
+            <summary>
+            Registers the builder as a generator for resolving the given type.
+            Skips registration if the type is already present in the Registrations.
+            </summary>
+            <typeparam name="T">The type that shall be registered.</typeparam>
+            <param name="builder">The function to be executed when the given type is resolved.</param>
+            <returns>The container.</returns>
+        </member>
+        <member name="M:mwo.SimpleDI.IDependencyContainer.RegisterStrong``1(System.Func{mwo.SimpleDI.IDependencyContainer,``0})">
+            <summary>
+            Registers the builder as a generator for resolving the given type.
+            Overwrites existing registrations for the type.
+            </summary>
+            <typeparam name="T">The type that shall be registered.</typeparam>
+            <param name="builder">The function to be executed when the given type is resolved.</param>
+            <returns>The container.</returns>
+        </member>
+        <member name="M:mwo.SimpleDI.IDependencyContainer.IsRegistered``1">
+            <summary>
+            Checks whether a registration is present for the given type.
+            </summary>
+            <typeparam name="T">The type that shall be checked.</typeparam>
+            <returns>true if the type is registered to the container or its parent.</returns>
+        </member>
+        <member name="M:mwo.SimpleDI.IDependencyContainer.Resolve``1">
+            <summary>
+            Resolves a previously registered object.
+            </summary>
+            <typeparam name="T">The type that shall be resolved.</typeparam>
+            <returns>An object of the type T.</returns>
+        </member>
+        <member name="M:mwo.SimpleDI.IDependencyContainer.TryResolve``1(``0@)">
+            <summary>
+            Tries to resolve an objectt of the given type.
+            </summary>
+            <typeparam name="T">The type that shall be resolved.</typeparam>
+            <param name="obj">If true is returned, contains an object of type T, otherwise obj is default.</param>
+            <returns>true, if resolved sucessfully.</returns>
+        </member>
+        <member name="T:mwo.SimpleDI.DuplicateRegistrationException">
+            <summary>
+            The exception is thrown if the state of the registrations is not correct while registering.
+            </summary>
+        </member>
+        <member name="M:mwo.SimpleDI.DuplicateRegistrationException.#ctor(System.Type)">
+            <summary>
+            Initializes a new instance of the mwo.SimpleDI.DuplicateRegistrationException class.
+            </summary>
+            <param name="t">The type that was already registered, is wrapped into a message that describes the error.</param>
+        </member>
+        <member name="M:mwo.SimpleDI.DuplicateRegistrationException.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the mwo.SimpleDI.DuplicateRegistrationException class.
+            </summary>
+            <param name="message">The message that describes the error.</param>
+        </member>
+        <member name="M:mwo.SimpleDI.DuplicateRegistrationException.#ctor(System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of the mwo.SimpleDI.DuplicateRegistrationException class.
+            </summary>
+            <param name="message">The message that describes the error.</param>
+            <param name="innerException">The exception that is the cause of the current exception.</param>
+        </member>
+        <member name="M:mwo.SimpleDI.DuplicateRegistrationException.#ctor">
+            <summary>
+            Initializes a new instance of the mwo.SimpleDI.DuplicateRegistrationException class.
+            </summary>
+        </member>
+        <member name="M:mwo.SimpleDI.DuplicateRegistrationException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Initializes a new instance of the mwo.SimpleDI.DuplicateRegistrationException class with serailized data.
+            </summary>
+            <param name="serializationInfo">The object that holds the serialized object data.</param>
+            <param name="streamingContext">The contextual information about the source or destination.</param>
+        </member>
+        <member name="T:mwo.SimpleDI.MissingRegistrationException">
+            <summary>
+            The exception is thrown if the state of the registrations is not correct while resolving.
+            </summary>
+        </member>
+        <member name="M:mwo.SimpleDI.MissingRegistrationException.#ctor(System.Type)">
+            <summary>
+            Initializes a new instance of the mwo.SimpleDI.MissingRegistrationException class.
+            </summary>
+            <param name="t">The type that was missing a registration, is wrapped into a message that describes the error.</param>
+        </member>
+        <member name="M:mwo.SimpleDI.MissingRegistrationException.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the mwo.SimpleDI.MissingRegistrationException class.
+            </summary>
+            <param name="message">The message that describes the error.</param>
+        </member>
+        <member name="M:mwo.SimpleDI.MissingRegistrationException.#ctor(System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of the mwo.SimpleDI.MissingRegistrationException class.
+            </summary>
+            <param name="message">The message that describes the error.</param>
+            <param name="innerException">The exception that is the cause of the current exception.</param>
+        </member>
+        <member name="M:mwo.SimpleDI.MissingRegistrationException.#ctor">
+            <summary>
+            Initializes a new instance of the mwo.SimpleDI.MissingRegistrationException class.
+            </summary>
+        </member>
+        <member name="M:mwo.SimpleDI.MissingRegistrationException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Initializes a new instance of the mwo.SimpleDI.MissingRegistrationException class with serailized data.
+            </summary>
+            <param name="serializationInfo">The object that holds the serialized object data.</param>
+            <param name="streamingContext">The contextual information about the source or destination.</param>
+        </member>
+    </members>
+</doc>
