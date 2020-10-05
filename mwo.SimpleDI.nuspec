@@ -2,7 +2,7 @@
 <package>
   <metadata>
     <id>mwo.SimpleDI</id>
-    <version>1.0.0.0</version>
+    <version>1.0.0.1</version>
     <title>mwo.SimpleDI</title>
     <authors>Marius Wodtke</authors>
     <owners>Marius Wodtke</owners>
@@ -10,6 +10,7 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>A Dependency Injection framework that works without a Build operation</description>
     <copyright>Copyright 2020</copyright>
+    <licenseUrl>https://opensource.org/licenses/MIT</licenseUrl>
     <releaseNotes>https://github.com/Kunter-Bunt/SimpleDI</releaseNotes>
     <dependencies/>
   </metadata>
