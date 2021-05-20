@@ -13,12 +13,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		build\mwo.SimpleDI.targets = build\mwo.SimpleDI.targets
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mwo.SimpleDI.Doc", "mwo.SimpleDI.Doc\mwo.SimpleDI.Doc.csproj", "{F369AF10-249B-4EBB-BD8A-7D24AA3EA7EA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "mwo.SimpleDI.Doc", "mwo.SimpleDI.Doc\mwo.SimpleDI.Doc.csproj", "{F369AF10-249B-4EBB-BD8A-7D24AA3EA7EA}"
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		mwo.SimpleDI\mwo.SimpleDI.projitems*{2b85c21e-9673-45b2-bd38-81d66ac061c6}*SharedItemsImports = 13
-		mwo.SimpleDI\mwo.SimpleDI.projitems*{89e4115c-4ffb-431d-84e8-ec7c9ed1068e}*SharedItemsImports = 4
 		mwo.SimpleDI\mwo.SimpleDI.projitems*{f369af10-249b-4ebb-bd8a-7d24aa3ea7ea}*SharedItemsImports = 5
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
