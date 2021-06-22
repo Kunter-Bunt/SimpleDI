@@ -25,7 +25,12 @@ namespace mwo.SimpleDI.Tests
 
         public static TDestination Map<TSource, TDestination>(this IMapper mapper, TSource source, IDependencyContainer container)
         {
-            return mapper.Map<TDestination>(source, _ => _.SetDependencyContainer(DependencyContainerManager.Default));
+            return mapper.Map<TDestination>(source, _ => _.SetDependencyContainer(container));
+        }
+
+        public static TDestination Map<TSource, TDestination>(this IMapper mapper, TSource source, TDestination dest, IDependencyContainer container)
+        {
+            return mapper.Map(source, dest, _ => _.SetDependencyContainer(container));
         }
     }
 }

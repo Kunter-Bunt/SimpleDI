@@ -26,6 +26,17 @@ namespace mwo.SimpleDI.Tests
             Assert.IsNotNull(res);
         }
 
+        [TestMethod]
+        public void TestMethod2()
+        {
+            DependencyContainerManager.Default.RegisterStrong<INamingConvention>(_ => new LowerNamingConvention());
+            var mapper = new SuperMapper();
+
+            var res = mapper.Map(address, new AddressDTO(), DependencyContainerManager.Default);
+
+            Assert.IsNotNull(res);
+        }
+
         public AddressDTO Map()
         {
             return _mapper.Map<Address, AddressDTO>(address, DependencyContainerManager.Default);
@@ -44,7 +55,7 @@ namespace mwo.SimpleDI.Tests
                     //.ForMember(_ => _.unmapped, _ => _.MapWithDependency((_, dep) => dep.SeparatorCharacter, _ => _.Resolve<INamingConvention>()))
                     .ForMember(_ => _.line1, _ => _.MapFrom(_ => $"{_.Street} {_.Number}"));
             });
-            //config.AssertConfigurationIsValid();
+            config.AssertConfigurationIsValid();
             //var executionPlan = config.BuildExecutionPlan(typeof(Address), typeof(AddressDTO));
             _mapper = config.CreateMapper();
         }
@@ -75,6 +86,49 @@ namespace mwo.SimpleDI.Tests
             public Regex SplittingExpression { get; } = LowerCase;
             public string SeparatorCharacter => "Dependency";//string.Empty;
             public string ReplaceValue(Match match) => match.Value[0].ToString().ToUpper() + match.Value.Substring(1);
+        }
+
+        public interface IMapping<in TInput, TOutput>
+        {
+            TOutput Map(TInput input, TOutput output, IDependencyContainer dep);
+        }
+
+        public abstract class AutoMapperBase
+        {
+            protected bool IsInitialized => Mapper != null;
+            protected IMapper Mapper { get; set; }
+            protected TOutput Map<TInput, TOutput>(TInput input, TOutput output, IDependencyContainer dep)
+            {
+                if (!IsInitialized) InternalInitialize();
+
+                return Mapper.Map(input, output, dep);
+            }
+
+            protected abstract void Initialize(IMapperConfigurationExpression cfg);
+
+            private void InternalInitialize()
+            {
+                var config = new MapperConfiguration(cfg => Initialize(cfg));
+                Mapper = config.CreateMapper();
+#if DEBUG
+                config.AssertConfigurationIsValid();
+#endif
+            }
+        }
+
+        public class SuperMapper : AutoMapperBase,
+            IMapping<Address, AddressDTO>
+        {
+            public AddressDTO Map(Address input, AddressDTO output, IDependencyContainer dep) => base.Map(input, output, dep);
+
+            protected override void Initialize(IMapperConfigurationExpression cfg)
+            {
+                cfg.RecognizePrefixes("pub_");
+                cfg.RecognizeDestinationPrefixes("dat_");
+                cfg.CreateMap<Address, AddressDTO>()
+                    .ForMember(_ => _.unmapped, _ => _.MapWithDependency((_, dep) => dep.SeparatorCharacter, _ => _.Resolve<INamingConvention>()))
+                    .ForMember(_ => _.line1, _ => _.MapFrom(_ => $"{_.Street} {_.Number}"));
+            }
         }
     }
 }
